@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- Bootstrap Css -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <title>Experiment</title>
+    <style>
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+        .button1 {
+            background-color: white; 
+            color: black; 
+            border: 2px solid #800000;
+            }
+
+        .button1:hover {
+            /* background-color: #800000; */
+            background-color:red;
+            color: white;
+        } 
+        .buttons{
+            margin: .5em;
+            width: 14%;
+            font-family: 'Raleway',sans-serif;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #d1c3a2;
+            background-color: #f7f1e3;
+            border: 2px solid rgba(112, 111, 211,0);
+            border-radius: 15px;
+            outline: none;
+            cursor: pointer;
+            transition: .3s;
+        }
+        .Active{
+            color: #706fd3;
+            border: 2px solid rgba(112, 111, 211,1);
+            box-shadow: 0px 0px 0px 1px rgba(112, 111, 211,1);
+            animation: anim-shadow .3s forwards;
+        }
+
+        @keyframes anim-shadow {
+            100% {
+                box-shadow: 0px 0px 25px 10px rgba(112, 111, 211,0);
+            }
+        }
+
+        input[type=button] {
+            font-size: 1em;
+            font-weight: bold;
+            margin: 5px 0px 0px 100px;
+            padding: 8px;
+            background-color: #EEE;
+            color: #222;
+            border: 4px solid orange;
+        }
+      
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="offset-4 col-12">
+                <h1>Wedge Shaped Thin Film</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 ">
+                <div class="card">
+                    <h3 class="card-header bg-primary text-white">Variables</h3>
+                    <div class="card-body">
+                        <div class="slidecontainer">
+                            <!-- <h5>To turn on the light click on the below button </h5> -->
+                            <div style="display: flex;">
+                            <button onClick="lightOn()" class="button button1" id="source">Light Off</button>
+                            <h5 style="margin:20px 0px 4px 190px">(λ=5890 Å)</h5>
+                            </div>
+                            <div style="display: flex;">
+                            <h5 style="margin-top: 0.7em;">Select paper to measure thickness</h5>
+                            <button onclick="lightTwo(),currentButton(0)" class="buttons Active" id="two">A</button>
+                            <button onclick="lightFour(),currentButton(1)" class="buttons" id="four">B</button>
+                            </div>
+                            <div style="display: flex; margin-top: 0.5em;">
+                                <h5 style="margin-top: 0.4em;margin-right: 1em;">Least reading on main scale</h5>
+                                <input type="text" id="xvalue" placeholder="     x value  " style="margin-left: 41px; width: 20%;" class="values">
+                                <h5 style="margin-top: 0.4em; margin-left: 4px;">cm</h5>
+                            </div>
+                            <div style="display: flex; margin-top: 0.8em;">
+                                <h5 style="margin-top: 0.4em;margin-right: 1em;">No of divisions on vernier scale</h5>
+                                <input type="text" id="yvalue" placeholder="     y value  " style="margin-left: 10px; width: 20%;" class="values">
+                                <h5 style="margin-top: 0.4em; margin-left: 4px;">cm</h5>
+                            </div>
+                            <div style="display: flex; margin-top: 0.8em;">
+                                <h5 style="margin-top: 0.4em;margin-right: 1em;">Least Count (LC=x/y) </h5>
+                                <input type="button" id="btn1" value="Calculate LC" >
+                            </div>
+                            <div style="display: flex; margin: 10px 35%" >
+                                <h5 id="output1"></h5>
+                                <h5 id="output2"></h5>
+                            </div>
+                            <div style="display: flex;"> 
+                                <h5 style="margin-right: 6em;">Microscope position</h5>
+                                <input type="range" min="0" max="46" step="1" value="22" id="myRange"/>
+                            </div>
+                            <h5>Observation Table</h5>
+                            <table class="table table-striped">
+                                <thead class="thead-dark ">
+                                    <tr>
+                                        <th>Fringe no</th>
+                                        <th>MSR</th>
+                                        <th>VSD</th>
+                                        <th>TR</th>
+                                        <th>5β</th>
+                                    </tr>
+                               </thead>
+                               <tbody>
+                                <tr>
+                                    <th>n</th>
+                                    <td style="width: 25%;"><input type="text" id="msr1" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                    <td style="width: 25%;"><input type="text" id="vsd1" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                    <td id="tr1"></td>
+                                    <td id="beta1"></td>
+                                </tr>
+                                <tr>
+                                    <th>n+5</th>
+                                    <td style="width: 25%;"><input type="text" id="msr2" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                    <td style="width: 25%;"><input type="text" id="vsd2" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                    <td id="tr2">&nbsp;</td>
+                                    <td id="beta2"></td>
+                                </tr>
+                                <tr>
+                                    <th>n+10</th>
+                                    <td style="width: 25%;"><input type="text" id="msr3" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                    <td style="width: 25%;"><input type="text" id="vsd3" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                    <td id="tr3">&nbsp;</td>
+                                    <td id="beta3"></td>
+                                </tr>
+                                <tr>
+                                    <th>n+15</th>
+                                    <td style="width: 25%;"><input type="text" id="msr4" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                    <td style="width: 25%;"><input type="text" id="vsd4" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                    <td id="tr4">&nbsp;</td>
+                                    <td id="beta4" ></td>
+                                </tr>
+                               </tbody>
+                            </table>
+
+                            <div style="display: flex; margin-top: 10px; ">
+                                    <h5 id="output3"></h5>
+                                    <h5 id="output4"></h5>
+                                    <h5 id="output5" style="margin-left: 70px;"></h5>
+                                    <h5 id="output6"></h5>
+                            </div>
+
+
+                            <div style="display: flex; margin-top: 0.8em; margin-left: 15%;">
+                                <input type="button" id="btn2" value="Calculate β" >
+                            </div>
+
+                            <div style="display: flex; margin-top: 0.5em;">
+                                <h5 style="margin-top: 0.4em;margin-right: 1em;">Length of glass plate (L)</h5>
+                                <input type="text" id="lvalue" placeholder="     L value  " style="margin-left: 70px; width: 20%;">
+                                <h5 style="margin-top: 0.4em; margin-left: 4px;">cm</h5>
+                            </div>
+                            <div style="display: flex; margin-top: 0.8em;">
+                                <h5 style="margin-top: 0.4em;margin-right: 1.4em;">Thickness (t=λL/2β)</h5>
+                                <input type="button" id="btn3" value="Calculate t" >
+                            </div>
+
+                            <div style="display: flex; margin: 10px 25%; ">
+                                <h5 id="output7"></h5>
+                                <h5 id="output8"></h5>
+                                <h5 id="first"></h5>
+                                <h5><sup id="upper"></sup></h5>
+                                <h5 id="last"></h5>
+                                
+                            </div>
+                            <!-- <center>
+                            <button onClick="history.go(0);" class="button button1 ">Reset</button>
+                            </center> -->
+                        </div>
+                    </div>   
+                </div>
+            </div>
+            <div class="col-6">
+                <img src="./physics_images/22.png" alt="no light" id='img'>
+            </div>
+        </div>
+        
+    </div>    
+        <script>
+        var light = 0;
+        var lighttwo = 1;
+        var lightfour = 0;
+        var slider = document.getElementById("myRange");
+        
+        var swap = document.getElementById("source");
+        var two = document.getElementById("two");
+        var four = document.getElementById("four");
+        
+    
+        
+
+        function lightOn(){
+            var image = document.getElementById("img");
+            if(light == 0) {
+                light = 1;
+                if(lighttwo == 1){
+                    image.src = "./physics_images/a" +slider.value +".png";
+                    swap.innerHTML = "Light On"
+                }
+                else if(lightfour == 1){
+                    image.src = "./physics_images/l" +slider.value +".png";
+                    swap.innerHTML = "Light On"
+                }
+            }
+            else{
+                light = 0;
+                image.src = "./physics_images/" +slider.value +".png";
+                swap.innerHTML = "Light Off"
+            }
+        }
+
+        function lightTwo(){
+            var image = document.getElementById("img");
+            if(lighttwo == 0) {
+                lighttwo = 1;
+                lightfour = 0;
+                if(light == 1){
+                    image.src = "./physics_images/a" +slider.value +".png";
+                }
+                else{
+                    image.src = "./physics_images/" +slider.value +".png";
+                }
+                
+            }
+        }
+
+        function lightFour(){
+            var image = document.getElementById("img");
+            if(lightfour == 0) {
+                lightfour = 1;
+                lighttwo = 0;
+                if(light == 1){
+                    image.src = "./physics_images/l" +slider.value +".png";
+                }
+                else{
+                    image.src = "./physics_images/" +slider.value +".png";
+                }
+            }
+        }
+
+        // Update the current slider value (each time you drag the slider handle)
+    
+        slider.oninput = function () {
+            if(light == 0){
+            if (this.value == 0) {
+            document.getElementById("img").src = "./physics_images/0.png";
+            }
+            else if (this.value == 1) {
+            document.getElementById("img").src = "./physics_images/1.png";
+            }
+            else if (this.value == 2) {
+            document.getElementById("img").src = "./physics_images/2.png";
+            }
+            else if (this.value == 3) {
+            document.getElementById("img").src = "./physics_images/3.png";
+            }
+            else if (this.value == 4) {
+            document.getElementById("img").src = "./physics_images/4.png";
+            }
+            else if (this.value == 5) {
+            document.getElementById("img").src = "./physics_images/5.png";
+            }
+            else if (this.value == 6) {
+            document.getElementById("img").src = "./physics_images/6.png";
+            }
+            else if (this.value == 7) {
+            document.getElementById("img").src = "./physics_images/7.png";
+            }
+            else if (this.value == 8) {
+            document.getElementById("img").src = "./physics_images/8.png";
+            }
+            else if (this.value == 9) {
+            document.getElementById("img").src = "./physics_images/9.png";
+            }
+            else if (this.value == 10) {
+            document.getElementById("img").src = "./physics_images/10.png";
+            }
+            else if (this.value == 11) {
+            document.getElementById("img").src = "./physics_images/11.png";
+            }
+            else if (this.value == 12) {
+            document.getElementById("img").src = "./physics_images/12.png";
+            }
+            else if (this.value == 13) {
+            document.getElementById("img").src = "./physics_images/13.png";
+            }
+            else if (this.value == 14) {
+            document.getElementById("img").src = "./physics_images/14.png";
+            }
+            else if (this.value == 15) {
+            document.getElementById("img").src = "./physics_images/15.png";
+            }
+            else if (this.value == 16) {
+            document.getElementById("img").src = "./physics_images/16.png";
+            }
+            else if (this.value == 17) {
+            document.getElementById("img").src = "./physics_images/17.png";
+            }
+            else if (this.value == 18) {
+            document.getElementById("img").src = "./physics_images/18.png";
+            }
+            else if (this.value == 19) {
+            document.getElementById("img").src = "./physics_images/19.png";
+            }
+            else if (this.value == 20) {
+            document.getElementById("img").src = "./physics_images/20.png";
+            }
+            else if (this.value == 21) {
+            document.getElementById("img").src = "./physics_images/21.png";
+            }
+            else if (this.value == 22) {
+            document.getElementById("img").src = "./physics_images/22.png";
+            }
+            else if (this.value == 23) {
+            document.getElementById("img").src = "./physics_images/23.png";
+            }
+            else if (this.value == 24) {
+            document.getElementById("img").src = "./physics_images/24.png";
+            }
+            else if (this.value == 25) {
+            document.getElementById("img").src = "./physics_images/25.png";
+            }
+            else if (this.value == 26) {
+            document.getElementById("img").src = "./physics_images/26.png";
+            }
+            else if (this.value == 27) {
+            document.getElementById("img").src = "./physics_images/27.png";
+            }
+            else if (this.value == 28) {
+            document.getElementById("img").src = "./physics_images/28.png";
+            }
+            else if (this.value == 29) {
+            document.getElementById("img").src = "./physics_images/29.png";
+            }
+            else if (this.value == 30) {
+            document.getElementById("img").src = "./physics_images/30.png";
+            }
+            else if (this.value == 31) {
+            document.getElementById("img").src = "./physics_images/31.png";
+            }
+            else if (this.value == 32) {
+            document.getElementById("img").src = "./physics_images/32.png";
+            }
+            else if (this.value == 33) {
+            document.getElementById("img").src = "./physics_images/33.png";
+            }
+            else if (this.value == 34) {
+            document.getElementById("img").src = "./physics_images/34.png";
+            }
+            else if (this.value == 35) {
+            document.getElementById("img").src = "./physics_images/35.png";
+            }
+            else if (this.value == 36) {
+            document.getElementById("img").src = "./physics_images/36.png";
+            }
+            else if (this.value == 37) {
+            document.getElementById("img").src = "./physics_images/37.png";
+            }
+            else if (this.value == 38) {
+            document.getElementById("img").src = "./physics_images/38.png";
+            }
+            else if (this.value == 39) {
+            document.getElementById("img").src = "./physics_images/39.png";
+            }
+            else if (this.value == 40) {
+            document.getElementById("img").src = "./physics_images/40.png";
+            }
+            else if (this.value == 41) {
+            document.getElementById("img").src = "./physics_images/41.png";
+            }
+            else if (this.value == 42) {
+            document.getElementById("img").src = "./physics_images/42.png";
+            }
+            else if (this.value == 43) {
+            document.getElementById("img").src = "./physics_images/43.png";
+            }
+            else if (this.value == 44) {
+            document.getElementById("img").src = "./physics_images/44.png";
+            }
+            else if (this.value == 45) {
+            document.getElementById("img").src = "./physics_images/45.png";
+            }
+            else if (this.value == 46) {
+            document.getElementById("img").src = "./physics_images/46.png";
+            }
+            }
+            else if(light == 1 && lightfour == 1){
+            if (this.value == 0) {
+            document.getElementById("img").src = "./physics_images/l0.png";
+            }
+            else if (this.value == 1) {
+            document.getElementById("img").src = "./physics_images/l1.png";
+            }
+            else if (this.value == 2) {
+            document.getElementById("img").src = "./physics_images/l2.png";
+            }
+            else if (this.value == 3) {
+            document.getElementById("img").src = "./physics_images/l3.png";
+            }
+            else if (this.value == 4) {
+            document.getElementById("img").src = "./physics_images/l4.png";
+            }
+            else if (this.value == 5) {
+            document.getElementById("img").src = "./physics_images/l5.png";
+            }
+            else if (this.value == 6) {
+            document.getElementById("img").src = "./physics_images/l6.png";
+            }
+            else if (this.value == 7) {
+            document.getElementById("img").src = "./physics_images/l7.png";
+            }
+            else if (this.value == 8) {
+            document.getElementById("img").src = "./physics_images/l8.png";
+            }
+            else if (this.value == 9) {
+            document.getElementById("img").src = "./physics_images/l9.png";
+            }
+            else if (this.value == 10) {
+            document.getElementById("img").src = "./physics_images/l10.png";
+            }
+            else if (this.value == 11) {
+            document.getElementById("img").src = "./physics_images/l11.png";
+            }
+            else if (this.value == 12) {
+            document.getElementById("img").src = "./physics_images/l12.png";
+            }
+            else if (this.value == 13) {
+            document.getElementById("img").src = "./physics_images/l13.png";
+            }
+            else if (this.value == 14) {
+            document.getElementById("img").src = "./physics_images/l14.png";
+            }
+            else if (this.value == 15) {
+            document.getElementById("img").src = "./physics_images/l15.png";
+            }
+            else if (this.value == 16) {
+            document.getElementById("img").src = "./physics_images/l16.png";
+            }
+            else if (this.value == 17) {
+            document.getElementById("img").src = "./physics_images/l17.png";
+            }
+            else if (this.value == 18) {
+            document.getElementById("img").src = "./physics_images/l18.png";
+            }
+            else if (this.value == 19) {
+            document.getElementById("img").src = "./physics_images/l19.png";
+            }
+            else if (this.value == 20) {
+            document.getElementById("img").src = "./physics_images/l20.png";
+            }
+            else if (this.value == 21) {
+            document.getElementById("img").src = "./physics_images/l21.png";
+            }
+            else if (this.value == 22) {
+            document.getElementById("img").src = "./physics_images/l22.png";
+            }
+            else if (this.value == 23) {
+            document.getElementById("img").src = "./physics_images/l23.png";
+            }
+            else if (this.value == 24) {
+            document.getElementById("img").src = "./physics_images/l24.png";
+            }
+            else if (this.value == 25) {
+            document.getElementById("img").src = "./physics_images/l25.png";
+            }
+            else if (this.value == 26) {
+            document.getElementById("img").src = "./physics_images/l26.png";
+            }
+            else if (this.value == 27) {
+            document.getElementById("img").src = "./physics_images/l27.png";
+            }
+            else if (this.value == 28) {
+            document.getElementById("img").src = "./physics_images/l28.png";
+            }
+            else if (this.value == 29) {
+            document.getElementById("img").src = "./physics_images/l29.png";
+            }
+            else if (this.value == 30) {
+            document.getElementById("img").src = "./physics_images/l30.png";
+            }
+            else if (this.value == 31) {
+            document.getElementById("img").src = "./physics_images/l31.png";
+            }
+            else if (this.value == 32) {
+            document.getElementById("img").src = "./physics_images/l32.png";
+            }
+            else if (this.value == 33) {
+            document.getElementById("img").src = "./physics_images/l33.png";
+            }
+            else if (this.value == 34) {
+            document.getElementById("img").src = "./physics_images/l34.png";
+            }
+            else if (this.value == 35) {
+            document.getElementById("img").src = "./physics_images/l35.png";
+            }
+            else if (this.value == 36) {
+            document.getElementById("img").src = "./physics_images/l36.png";
+            }
+            else if (this.value == 37) {
+            document.getElementById("img").src = "./physics_images/l37.png";
+            }
+            else if (this.value == 38) {
+            document.getElementById("img").src = "./physics_images/l38.png";
+            }
+            else if (this.value == 39) {
+            document.getElementById("img").src = "./physics_images/l39.png";
+            }
+            else if (this.value == 40) {
+            document.getElementById("img").src = "./physics_images/l40.png";
+            }
+            else if (this.value == 41) {
+            document.getElementById("img").src = "./physics_images/l41.png";
+            }
+            else if (this.value == 42) {
+            document.getElementById("img").src = "./physics_images/l42.png";
+            }
+            else if (this.value == 43) {
+            document.getElementById("img").src = "./physics_images/l43.png";
+            }
+            else if (this.value == 44) {
+            document.getElementById("img").src = "./physics_images/l44.png";
+            }
+            else if (this.value == 45) {
+            document.getElementById("img").src = "./physics_images/l45.png";
+            }
+            else if (this.value == 46) {
+            document.getElementById("img").src = "./physics_images/l46.png";
+            }             
+            }
+
+
+            else if(light == 1 && lighttwo == 1){
+            if (this.value == 0) {
+            document.getElementById("img").src = "./physics_images/a0.png";
+            }
+            else if (this.value == 1) {
+            document.getElementById("img").src = "./physics_images/a1.png";
+            }
+            else if (this.value == 2) {
+            document.getElementById("img").src = "./physics_images/a2.png";
+            }
+            else if (this.value == 3) {
+            document.getElementById("img").src = "./physics_images/a3.png";
+            }
+            else if (this.value == 4) {
+            document.getElementById("img").src = "./physics_images/a4.png";
+            }
+            else if (this.value == 5) {
+            document.getElementById("img").src = "./physics_images/a5.png";
+            }
+            else if (this.value == 6) {
+            document.getElementById("img").src = "./physics_images/a6.png";
+            }
+            else if (this.value == 7) {
+            document.getElementById("img").src = "./physics_images/a7.png";
+            }
+            else if (this.value == 8) {
+            document.getElementById("img").src = "./physics_images/a8.png";
+            }
+            else if (this.value == 9) {
+            document.getElementById("img").src = "./physics_images/a9.png";
+            }
+            else if (this.value == 10) {
+            document.getElementById("img").src = "./physics_images/a10.png";
+            }
+            else if (this.value == 11) {
+            document.getElementById("img").src = "./physics_images/a11.png";
+            }
+            else if (this.value == 12) {
+            document.getElementById("img").src = "./physics_images/a12.png";
+            }
+            else if (this.value == 13) {
+            document.getElementById("img").src = "./physics_images/a13.png";
+            }
+            else if (this.value == 14) {
+            document.getElementById("img").src = "./physics_images/a14.png";
+            }
+            else if (this.value == 15) {
+            document.getElementById("img").src = "./physics_images/a15.png";
+            }
+            else if (this.value == 16) {
+            document.getElementById("img").src = "./physics_images/a16.png";
+            }
+            else if (this.value == 17) {
+            document.getElementById("img").src = "./physics_images/a17.png";
+            }
+            else if (this.value == 18) {
+            document.getElementById("img").src = "./physics_images/a18.png";
+            }
+            else if (this.value == 19) {
+            document.getElementById("img").src = "./physics_images/a19.png";
+            }
+            else if (this.value == 20) {
+            document.getElementById("img").src = "./physics_images/a20.png";
+            }
+            else if (this.value == 21) {
+            document.getElementById("img").src = "./physics_images/a21.png";
+            }
+            else if (this.value == 22) {
+            document.getElementById("img").src = "./physics_images/a22.png";
+            }
+            else if (this.value == 23) {
+            document.getElementById("img").src = "./physics_images/a23.png";
+            }
+            else if (this.value == 24) {
+            document.getElementById("img").src = "./physics_images/a24.png";
+            }
+            else if (this.value == 25) {
+            document.getElementById("img").src = "./physics_images/a25.png";
+            }
+            else if (this.value == 26) {
+            document.getElementById("img").src = "./physics_images/a26.png";
+            }
+            else if (this.value == 27) {
+            document.getElementById("img").src = "./physics_images/a27.png";
+            }
+            else if (this.value == 28) {
+            document.getElementById("img").src = "./physics_images/a28.png";
+            }
+            else if (this.value == 29) {
+            document.getElementById("img").src = "./physics_images/a29.png";
+            }
+            else if (this.value == 30) {
+            document.getElementById("img").src = "./physics_images/a30.png";
+            }
+            else if (this.value == 31) {
+            document.getElementById("img").src = "./physics_images/a31.png";
+            }
+            else if (this.value == 32) {
+            document.getElementById("img").src = "./physics_images/a32.png";
+            }
+            else if (this.value == 33) {
+            document.getElementById("img").src = "./physics_images/a33.png";
+            }
+            else if (this.value == 34) {
+            document.getElementById("img").src = "./physics_images/a34.png";
+            }
+            else if (this.value == 35) {
+            document.getElementById("img").src = "./physics_images/a35.png";
+            }
+            else if (this.value == 36) {
+            document.getElementById("img").src = "./physics_images/a36.png";
+            }
+            else if (this.value == 37) {
+            document.getElementById("img").src = "./physics_images/a37.png";
+            }
+            else if (this.value == 38) {
+            document.getElementById("img").src = "./physics_images/a38.png";
+            }
+            else if (this.value == 39) {
+            document.getElementById("img").src = "./physics_images/a39.png";
+            }
+            else if (this.value == 40) {
+            document.getElementById("img").src = "./physics_images/a40.png";
+            }
+            else if (this.value == 41) {
+            document.getElementById("img").src = "./physics_images/a41.png";
+            }
+            else if (this.value == 42) {
+            document.getElementById("img").src = "./physics_images/a42.png";
+            }
+            else if (this.value == 43) {
+            document.getElementById("img").src = "./physics_images/a43.png";
+            }
+            else if (this.value == 44) {
+            document.getElementById("img").src = "./physics_images/a44.png";
+            }
+            else if (this.value == 45) {
+            document.getElementById("img").src = "./physics_images/a45.png";
+            }
+            else if (this.value == 46) {
+            document.getElementById("img").src = "./physics_images/a46.png";
+            }             
+            }
+
+
+        }
+        </script>
+
+        <script>
+            var x,x1,x2,x3,x4;
+            var y,y1,y2,y3,y4;
+            var z,z0,z1,z2,z3,z4,z5,z6,z7,z8,z9;
+            var cal;
+            var result;
+            var t;            
+            var val1 = document.getElementById('xvalue');
+            var val2 = document.getElementById('yvalue');
+            var val3 = document.getElementById('lvalue');
+            var btn1 = document.getElementById('btn1');
+            var btn2 = document.getElementById('btn2');
+            var btn3 = document.getElementById('btn3');
+            var out1 = document.getElementById('output1');
+            var out2 = document.getElementById('output2');
+            var out3 = document.getElementById('output3');
+            var out4 = document.getElementById('output4');
+            var out5 = document.getElementById('output5');
+            var out6 = document.getElementById('output6');
+            var out7 = document.getElementById('output7');
+            var out8 = document.getElementById('output8');
+            var upper = document.getElementById('upper');
+            var first = document.getElementById('first');
+            var last = document.getElementById('last');
+            var inputs = document.getElementsByClassName('values');
+            var msr1 = document.getElementById('msr1');
+            var msr2 = document.getElementById('msr2');
+            var msr3 = document.getElementById('msr3');
+            var msr4 = document.getElementById('msr4');
+            var vsd1 = document.getElementById('vsd1');
+            var vsd2 = document.getElementById('vsd2');
+            var vsd3 = document.getElementById('vsd3');
+            var vsd4 = document.getElementById('vsd4');
+            var tr1 = document.getElementById('tr1');
+            var tr2 = document.getElementById('tr2');
+            var tr3 = document.getElementById('tr3');
+            var tr4 = document.getElementById('tr4');
+            var beta1 = document.getElementById('beta1');
+            var beta2 = document.getElementById('beta2');
+            var beta3 = document.getElementById('beta3');
+            var beta4 = document.getElementById('beta4');
+
+
+
+            var index = 0;
+            var item = document.getElementsByClassName('buttons');
+
+            function currentButton(n){
+                showActive(index = n);
+            }
+
+            function showActive(n){
+                for(var i =0 ; i < item.length ; i++){
+                    item[i].className = item[i].className.replace('Active','');
+                }
+                item[n].className += ' buttons Active';
+            }
+
+            function fun1(){
+                x = val1.value;
+                y = val2.value;
+                cal = x/y;
+                result = cal.toFixed(3);
+                out1.innerHTML = " ∴ LC = ";
+                out2.innerHTML = cal.toFixed(3) + " cm";
+                for(var i = 0 ; i < 2 ; i++){
+                    inputs[i].value = '';
+                }
+            }
+            function fun2(){
+                x1 = msr1.value;
+                y1 = vsd1.value;
+                z1 = result;
+                z1=y1*z1;
+                z1 = parseFloat(x1) + z1;
+                tr1.innerHTML = z1.toFixed(3);
+                fun3();
+            }
+
+            function fun3(){
+                x2 = msr2.value;
+                y2 = vsd2.value;
+                z2 = result;
+                z2=y2*z2;
+                z2 = parseFloat(x2) + z2;
+                tr2.innerHTML = z2.toFixed(3);
+                z5=Math.abs(z2-z1);
+                z5=z5*5;
+                beta1.innerHTML = z5.toFixed(3);
+                fun4();
+            }
+
+            function fun4(){
+                x3 = msr3.value;
+                y3 = vsd3.value;
+                z3 = result;
+                z3=y3*z3;
+                z3 = parseFloat(x3) + z3;
+                tr3.innerHTML = z3.toFixed(3);
+                z6=Math.abs(z3-z2);
+                z6=z6*5;
+                beta2.innerHTML = z6.toFixed(3);
+                fun5();
+            }
+
+            function fun5(){
+                x4 = msr4.value;
+                y4 = vsd4.value;
+                z4 = result;
+                z4=y4*z4;
+                z4 = parseFloat(x4) + z4;
+                tr4.innerHTML = z4.toFixed(3);
+                z7=Math.abs(z4-z3);
+                z7=z7*5;
+                beta3.innerHTML = z7.toFixed(3);
+                beta4.innerHTML = '-';
+                fun6();
+            }
+
+            function fun6(){
+                z8=z5+z6+z7;
+                z8=z8/3;
+                z9=z8/5;
+                out3.innerHTML = " ∴ MEAN 5β = ";
+                out4.innerHTML = z8.toFixed(3) + " cm";
+                out5.innerHTML = " ∴ MEAN β = ";
+                out6.innerHTML = z9.toFixed(3) + " cm";
+            }
+
+            function fun7(){
+                var lamda = 5890;
+                z=val3.value;
+                z0=2*z9;
+                t = lamda*z;
+                t = t/z0;
+                out7.innerHTML = 't = ';
+                out8.innerHTML = t.toFixed(3);
+                first.innerHTML = '*10';
+                upper.innerHTML = '-8';
+                last.innerHTML = ' cm';
+            }
+
+            btn1.addEventListener('click',fun1);
+            btn2.addEventListener('click',fun2);
+            btn3.addEventListener('click',fun7);
+
+        </script>
+        
+
+      
+
+         <!-- jQuery first, then Popper.js, then Bootstrap JS-->
+         <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+         <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+         <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
