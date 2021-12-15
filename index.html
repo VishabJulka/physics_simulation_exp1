@@ -60,6 +60,44 @@
             }
         }
 
+        /* #imagecontainer{
+            width: 100%;
+            height: 100%;
+        }
+
+        #imagecontainer > img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        } */
+
+
+
+
+        /* .wrapper{
+            width: 940px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .fixed-wrapper{
+            width: 220px;
+            position:absolute;
+            top: 0;
+        }
+
+        .fixed{
+            width: 220px;
+            position: fixed;
+        } */
+
+
+        .fixed{
+            position: sticky;
+            top: 0;
+        }
+
+
         input[type=button] {
             font-size: 1em;
             font-weight: bold;
@@ -75,48 +113,64 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="offset-4 col-12">
+            <div class="col-12 offset-4">
                 <h1>Wedge Shaped Thin Film</h1>
             </div>
         </div>
         <div class="row">
-            <div class="col-6 ">
-                <div class="card">
-                    <h3 class="card-header bg-primary text-white">Variables</h3>
+            <div class="col-12 col-md-6">
+                <div class="card" style="margin-bottom: 1em;">
+                    <h3 class="card-header bg-primary text-white">Least Count Of Travelling Microscope</h3>
                     <div class="card-body">
                         <div class="slidecontainer">
                             <!-- <h5>To turn on the light click on the below button </h5> -->
-                            <div style="display: flex;">
+
+
+                            <!-- <div style="display: flex;">
                             <button onClick="lightOn()" class="button button1" id="source">Light Off</button>
                             <h5 style="margin:20px 0px 4px 190px">(λ=5890 Å)</h5>
-                            </div>
-                            <div style="display: flex;">
+                            </div> -->
+
+
+                            <!-- <div style="display: flex;">
                             <h5 style="margin-top: 0.7em;">Select paper to measure thickness</h5>
                             <button onclick="lightTwo(),currentButton(0)" class="buttons Active" id="two">A</button>
                             <button onclick="lightFour(),currentButton(1)" class="buttons" id="four">B</button>
-                            </div>
+                            </div> -->
+
+
                             <div style="display: flex; margin-top: 0.5em;">
                                 <h5 style="margin-top: 0.4em;margin-right: 1em;">Least reading on main scale</h5>
                                 <input type="text" id="xvalue" placeholder="     x value  " style="margin-left: 41px; width: 20%;" class="values">
                                 <h5 style="margin-top: 0.4em; margin-left: 4px;">cm</h5>
                             </div>
+
+
                             <div style="display: flex; margin-top: 0.8em;">
                                 <h5 style="margin-top: 0.4em;margin-right: 1em;">No of divisions on vernier scale</h5>
                                 <input type="text" id="yvalue" placeholder="     y value  " style="margin-left: 10px; width: 20%;" class="values">
                                 <h5 style="margin-top: 0.4em; margin-left: 4px;">cm</h5>
                             </div>
+
+
                             <div style="display: flex; margin-top: 0.8em;">
                                 <h5 style="margin-top: 0.4em;margin-right: 1em;">Least Count (LC=x/y) </h5>
                                 <input type="button" id="btn1" value="Calculate LC" >
                             </div>
+
+
                             <div style="display: flex; margin: 10px 35%" >
                                 <h5 id="output1"></h5>
                                 <h5 id="output2"></h5>
                             </div>
-                            <div style="display: flex;"> 
+
+
+                            <!-- <div style="display: flex;"> 
                                 <h5 style="margin-right: 6em;">Microscope position</h5>
                                 <input type="range" min="0" max="46" step="1" value="22" id="myRange"/>
                             </div>
+
+
                             <h5>Observation Table</h5>
                             <table class="table table-striped">
                                 <thead class="thead-dark ">
@@ -189,6 +243,158 @@
                                 <h5><sup id="upper"></sup></h5>
                                 <h5 id="last"></h5>
                                 
+                            </div> -->
+
+
+                            <!-- <center>
+                            <button onClick="history.go(0);" class="button button1 ">Reset</button>
+                            </center> -->
+
+
+                        </div>
+                    </div>   
+                </div>
+
+
+
+
+
+
+
+                <div class="card">
+                    <h3 class="card-header bg-primary text-white">Observation</h3>
+                    <div class="card-body">
+                        <div class="slidecontainer">
+                            <!-- <h5>To turn on the light click on the below button </h5> -->
+
+
+                            <div style="display: flex;">
+                            <!-- <button onClick="lightOn()" class="button button1" id="source">Light Off</button> -->
+                            <h5 style="margin-top: 30px;">Wavelength of light (λ=5890 Å)</h5>
+                            <button onClick="lightOn()" class="button button1" id="source" style="margin:20px 0px 10px 35px">Light Off</button>
+                            </div>
+
+
+
+                            <div style="display: flex;">
+                            <h5 style="margin-top: 0.7em;">Select paper to measure thickness</h5>
+                            <button onclick="lightTwo(),currentButton(0)" class="buttons Active" id="two">A</button>
+                            <button onclick="lightFour(),currentButton(1)" class="buttons" id="four">B</button>
+                            </div>
+
+                            <div style="display: flex; margin-top: 0.7em; margin-bottom: 20px;">
+                                <h5 style="margin-top: 0.4em;margin-right: 1em;">Length of glass plate (L)</h5>
+                                <input type="text" id="lvalue" placeholder="     L value  " style="margin-left: 83px; width: 20%;">
+                                <h5 style="margin-top: 0.4em; margin-left: 4px;">cm</h5>
+                            </div>
+
+                            <!-- <div style="display: flex; margin-top: 0.5em;">
+                                <h5 style="margin-top: 0.4em;margin-right: 1em;">Least reading on main scale</h5>
+                                <input type="text" id="xvalue" placeholder="     x value  " style="margin-left: 41px; width: 20%;" class="values">
+                                <h5 style="margin-top: 0.4em; margin-left: 4px;">cm</h5>
+                            </div>
+                            <div style="display: flex; margin-top: 0.8em;">
+                                <h5 style="margin-top: 0.4em;margin-right: 1em;">No of divisions on vernier scale</h5>
+                                <input type="text" id="yvalue" placeholder="     y value  " style="margin-left: 10px; width: 20%;" class="values">
+                                <h5 style="margin-top: 0.4em; margin-left: 4px;">cm</h5>
+                            </div>
+                            <div style="display: flex; margin-top: 0.8em;">
+                                <h5 style="margin-top: 0.4em;margin-right: 1em;">Least Count (LC=x/y) </h5>
+                                <input type="button" id="btn1" value="Calculate LC" >
+                            </div>
+                            <div style="display: flex; margin: 10px 35%" >
+                                <h5 id="output1"></h5>
+                                <h5 id="output2"></h5>
+                            </div> -->
+
+                            <div style="display: flex; margin: 10px 0px 20px 0px;"> 
+                                <h5 style="margin-right: 6.6em;">Microscope position</h5>
+                                <input type="range" min="0" max="100" step="1" value="50" id="myRange"/>
+                            </div>
+                            <!-- <h5>Observation Table</h5> -->
+                            <table class="table table-striped">
+                                <thead class="thead-dark ">
+                                    <tr>
+                                        <th>Fringe no </th>
+                                        <th>MSR  </th>
+                                        <th>VSD</th>
+                                        <th>TR </th>
+                                        <th>5β </th>
+                                    </tr>
+                                    <!-- <tr>
+                                        <th ></th>
+                                        <th ></th>
+                                        <th ></th>
+                                        <th style="font-size: 10px; padding-bottom: 20px;">MSR+VSD*LC</th>
+                                        <th style="font-size: 10px;">TR(n+5)-TR(n)</th>
+                                    </tr> -->
+                               </thead>
+                               <tbody>
+                                <tr>
+                                    <th>n</th>
+                                    <td style="width: 25%;"><input type="text" id="msr1" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                    <td style="width: 25%;"><input type="text" id="vsd1" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                    <td id="tr1"></td>
+                                    <td id="beta1"></td>
+                                </tr>
+                                <tr>
+                                    <th>n+5</th>
+                                    <td style="width: 25%;"><input type="text" id="msr2" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                    <td style="width: 25%;"><input type="text" id="vsd2" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                    <td id="tr2">&nbsp;</td>
+                                    <td id="beta2"></td>
+                                </tr>
+                                <tr>
+                                    <th>n+10</th>
+                                    <td style="width: 25%;"><input type="text" id="msr3" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                    <td style="width: 25%;"><input type="text" id="vsd3" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                    <td id="tr3">&nbsp;</td>
+                                    <td id="beta3"></td>
+                                </tr>
+                                <tr>
+                                    <th>n+15</th>
+                                    <td style="width: 25%;"><input type="text" id="msr4" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                    <td style="width: 25%;"><input type="text" id="vsd4" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                    <td id="tr4">&nbsp;</td>
+                                    <td id="beta4" ></td>
+                                </tr>
+                               </tbody>
+                            </table>
+
+                            <div style="display: flex; margin-top: 10px; ">
+                                    <h5 id="output3"></h5>
+                                    <h5 id="output4"></h5>
+                                    <h5 id="output5" style="margin-left: 70px;"></h5>
+                                    <h5 id="output6"></h5>
+                            </div>
+
+
+                            <div style="display: flex; margin-top: 0.8em; margin-left: 15%;">
+                                <input type="button" id="btn2" value="Calculate β" >
+                            </div>
+
+
+                            <!-- <div style="display: flex; margin-top: 0.5em;">
+                                <h5 style="margin-top: 0.4em;margin-right: 1em;">Length of glass plate (L)</h5>
+                                <input type="text" id="lvalue" placeholder="     L value  " style="margin-left: 70px; width: 20%;">
+                                <h5 style="margin-top: 0.4em; margin-left: 4px;">cm</h5>
+                            </div> -->
+
+
+
+
+                            <div style="display: flex; margin-top: 0.8em;">
+                                <h5 style="margin-top: 0.4em;margin-right: 1.4em;">Thickness (t=λL/2β)</h5>
+                                <input type="button" id="btn3" value="Calculate t" >
+                            </div>
+
+                            <div style="display: flex; margin: 10px 35%; ">
+                                <h5 id="output7"></h5>
+                                <h5 id="output8"></h5>
+                                <!-- <h5 id="first"></h5>
+                                <h5><sup id="upper"></sup></h5> -->
+                                <h5 id="last"></h5>
+                                
                             </div>
                             <!-- <center>
                             <button onClick="history.go(0);" class="button button1 ">Reset</button>
@@ -197,9 +403,16 @@
                     </div>   
                 </div>
             </div>
-            <div class="col-6">
-                <img src="./physics_images/22.png" alt="no light" id='img'>
+            <div class="col-12 col-md-6 wrapper">
+                <!-- <div class="fixed-wrapper"> -->
+                    <div class="fixed">
+                        <img src="./physics_images/n50.png" alt="no light" id='img'>
+                    </div>
+                <!-- </div> -->
             </div>
+            <!-- <div class="col-12 d-none d-md-block col-md-6">
+                <img src="./physics_images/n50.png" alt="no light" id='img'>
+            </div> -->
         </div>
         
     </div>    
@@ -221,17 +434,17 @@
             if(light == 0) {
                 light = 1;
                 if(lighttwo == 1){
-                    image.src = "./physics_images/a" +slider.value +".png";
+                    image.src = "./physics_images/l" +slider.value +".png";
                     swap.innerHTML = "Light On"
                 }
                 else if(lightfour == 1){
-                    image.src = "./physics_images/l" +slider.value +".png";
+                    image.src = "./physics_images/a" +slider.value +".png";
                     swap.innerHTML = "Light On"
                 }
             }
             else{
                 light = 0;
-                image.src = "./physics_images/" +slider.value +".png";
+                image.src = "./physics_images/n" +slider.value +".png";
                 swap.innerHTML = "Light Off"
             }
         }
@@ -242,10 +455,10 @@
                 lighttwo = 1;
                 lightfour = 0;
                 if(light == 1){
-                    image.src = "./physics_images/a" +slider.value +".png";
+                    image.src = "./physics_images/l" +slider.value +".png";
                 }
                 else{
-                    image.src = "./physics_images/" +slider.value +".png";
+                    image.src = "./physics_images/n" +slider.value +".png";
                 }
                 
             }
@@ -257,10 +470,10 @@
                 lightfour = 1;
                 lighttwo = 0;
                 if(light == 1){
-                    image.src = "./physics_images/l" +slider.value +".png";
+                    image.src = "./physics_images/a" +slider.value +".png";
                 }
                 else{
-                    image.src = "./physics_images/" +slider.value +".png";
+                    image.src = "./physics_images/n" +slider.value +".png";
                 }
             }
         }
@@ -269,13 +482,13 @@
     
         slider.oninput = function () {
             if(light == 0){
-                document.getElementById("img").src = "./physics_images/" +this.value +".png";
+                document.getElementById("img").src = "./physics_images/n" +this.value +".png";
             }
             else if(light == 1 && lightfour == 1){
-                document.getElementById("img").src = "./physics_images/l" +this.value +".png";         
+                document.getElementById("img").src = "./physics_images/a" +this.value +".png";         
             }
             else if(light == 1 && lighttwo == 1){
-                document.getElementById("img").src = "./physics_images/a" +this.value +".png";     
+                document.getElementById("img").src = "./physics_images/l" +this.value +".png";     
             }
         }
         </script>
@@ -301,8 +514,8 @@
             var out6 = document.getElementById('output6');
             var out7 = document.getElementById('output7');
             var out8 = document.getElementById('output8');
-            var upper = document.getElementById('upper');
-            var first = document.getElementById('first');
+            // var upper = document.getElementById('upper');
+            // var first = document.getElementById('first');
             var last = document.getElementById('last');
             var inputs = document.getElementsByClassName('values');
             var msr1 = document.getElementById('msr1');
@@ -415,10 +628,11 @@
                 z0=2*z9;
                 t = lamda*z;
                 t = t/z0;
+                t=t/100000000
                 out7.innerHTML = 't = ';
-                out8.innerHTML = t.toFixed(3);
-                first.innerHTML = '*10';
-                upper.innerHTML = '-8';
+                out8.innerHTML = t.toFixed(4);
+                // first.innerHTML = '*10';
+                // upper.innerHTML = '-8';
                 last.innerHTML = ' cm';
             }
 
