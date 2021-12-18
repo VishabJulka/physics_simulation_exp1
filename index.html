@@ -22,6 +22,15 @@
             transition-duration: 0.4s;
             cursor: pointer;
         }
+        .button0{
+            background-color: white; 
+            color: black; 
+            border: 2px solid #800000;
+        }
+        .button0:hover{
+            background-color:white;
+            color: black;
+        }
         .button1 {
             background-color: white; 
             color: black; 
@@ -47,7 +56,28 @@
             cursor: pointer;
             transition: .3s;
         }
+        .button2{
+            margin: .5em;
+            width: 14%;
+            font-family: 'Raleway',sans-serif;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #d1c3a2;
+            background-color: #f7f1e3;
+            border: 2px solid rgba(112, 111, 211,0);
+            border-radius: 15px;
+            outline: none;
+            cursor: pointer;
+            transition: .3s;
+        }
         .Active{
+            color: #706fd3;
+            border: 2px solid rgba(112, 111, 211,1);
+            box-shadow: 0px 0px 0px 1px rgba(112, 111, 211,1);
+            animation: anim-shadow .3s forwards;
+        }
+
+        .Active1{
             color: #706fd3;
             border: 2px solid rgba(112, 111, 211,1);
             box-shadow: 0px 0px 0px 1px rgba(112, 111, 211,1);
@@ -60,37 +90,16 @@
             }
         }
 
-        /* #imagecontainer{
+        #imagecontainer{
             width: 100%;
             height: 100%;
         }
 
-        #imagecontainer > img{
+        #imag{
             width: 100%;
             height: 100%;
             object-fit: cover;
-        } */
-
-
-
-
-        /* .wrapper{
-            width: 940px;
-            margin: 0 auto;
-            position: relative;
         }
-
-        .fixed-wrapper{
-            width: 220px;
-            position:absolute;
-            top: 0;
-        }
-
-        .fixed{
-            width: 220px;
-            position: fixed;
-        } */
-
 
         .fixed{
             position: sticky;
@@ -111,9 +120,9 @@
 </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container d-none d-md-block">
         <div class="row">
-            <div class="col-12 offset-4">
+            <div class="d-none d-md-block col-md-12  offset-4">
                 <h1>Wedge Shaped Thin Film</h1>
             </div>
         </div>
@@ -123,21 +132,6 @@
                     <h3 class="card-header bg-primary text-white">Least Count Of Travelling Microscope</h3>
                     <div class="card-body">
                         <div class="slidecontainer">
-                            <!-- <h5>To turn on the light click on the below button </h5> -->
-
-
-                            <!-- <div style="display: flex;">
-                            <button onClick="lightOn()" class="button button1" id="source">Light Off</button>
-                            <h5 style="margin:20px 0px 4px 190px">(λ=5890 Å)</h5>
-                            </div> -->
-
-
-                            <!-- <div style="display: flex;">
-                            <h5 style="margin-top: 0.7em;">Select paper to measure thickness</h5>
-                            <button onclick="lightTwo(),currentButton(0)" class="buttons Active" id="two">A</button>
-                            <button onclick="lightFour(),currentButton(1)" class="buttons" id="four">B</button>
-                            </div> -->
-
 
                             <div style="display: flex; margin-top: 0.5em;">
                                 <h5 style="margin-top: 0.4em;margin-right: 1em;">Least reading on main scale</h5>
@@ -163,94 +157,6 @@
                                 <h5 id="output1"></h5>
                                 <h5 id="output2"></h5>
                             </div>
-
-
-                            <!-- <div style="display: flex;"> 
-                                <h5 style="margin-right: 6em;">Microscope position</h5>
-                                <input type="range" min="0" max="46" step="1" value="22" id="myRange"/>
-                            </div>
-
-
-                            <h5>Observation Table</h5>
-                            <table class="table table-striped">
-                                <thead class="thead-dark ">
-                                    <tr>
-                                        <th>Fringe no</th>
-                                        <th>MSR</th>
-                                        <th>VSD</th>
-                                        <th>TR</th>
-                                        <th>5β</th>
-                                    </tr>
-                               </thead>
-                               <tbody>
-                                <tr>
-                                    <th>n</th>
-                                    <td style="width: 25%;"><input type="text" id="msr1" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
-                                    <td style="width: 25%;"><input type="text" id="vsd1" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
-                                    <td id="tr1"></td>
-                                    <td id="beta1"></td>
-                                </tr>
-                                <tr>
-                                    <th>n+5</th>
-                                    <td style="width: 25%;"><input type="text" id="msr2" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
-                                    <td style="width: 25%;"><input type="text" id="vsd2" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
-                                    <td id="tr2">&nbsp;</td>
-                                    <td id="beta2"></td>
-                                </tr>
-                                <tr>
-                                    <th>n+10</th>
-                                    <td style="width: 25%;"><input type="text" id="msr3" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
-                                    <td style="width: 25%;"><input type="text" id="vsd3" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
-                                    <td id="tr3">&nbsp;</td>
-                                    <td id="beta3"></td>
-                                </tr>
-                                <tr>
-                                    <th>n+15</th>
-                                    <td style="width: 25%;"><input type="text" id="msr4" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
-                                    <td style="width: 25%;"><input type="text" id="vsd4" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
-                                    <td id="tr4">&nbsp;</td>
-                                    <td id="beta4" ></td>
-                                </tr>
-                               </tbody>
-                            </table>
-
-                            <div style="display: flex; margin-top: 10px; ">
-                                    <h5 id="output3"></h5>
-                                    <h5 id="output4"></h5>
-                                    <h5 id="output5" style="margin-left: 70px;"></h5>
-                                    <h5 id="output6"></h5>
-                            </div>
-
-
-                            <div style="display: flex; margin-top: 0.8em; margin-left: 15%;">
-                                <input type="button" id="btn2" value="Calculate β" >
-                            </div>
-
-                            <div style="display: flex; margin-top: 0.5em;">
-                                <h5 style="margin-top: 0.4em;margin-right: 1em;">Length of glass plate (L)</h5>
-                                <input type="text" id="lvalue" placeholder="     L value  " style="margin-left: 70px; width: 20%;">
-                                <h5 style="margin-top: 0.4em; margin-left: 4px;">cm</h5>
-                            </div>
-                            <div style="display: flex; margin-top: 0.8em;">
-                                <h5 style="margin-top: 0.4em;margin-right: 1.4em;">Thickness (t=λL/2β)</h5>
-                                <input type="button" id="btn3" value="Calculate t" >
-                            </div>
-
-                            <div style="display: flex; margin: 10px 25%; ">
-                                <h5 id="output7"></h5>
-                                <h5 id="output8"></h5>
-                                <h5 id="first"></h5>
-                                <h5><sup id="upper"></sup></h5>
-                                <h5 id="last"></h5>
-                                
-                            </div> -->
-
-
-                            <!-- <center>
-                            <button onClick="history.go(0);" class="button button1 ">Reset</button>
-                            </center> -->
-
-
                         </div>
                     </div>   
                 </div>
@@ -288,25 +194,6 @@
                                 <h5 style="margin-top: 0.4em; margin-left: 4px;">cm</h5>
                             </div>
 
-                            <!-- <div style="display: flex; margin-top: 0.5em;">
-                                <h5 style="margin-top: 0.4em;margin-right: 1em;">Least reading on main scale</h5>
-                                <input type="text" id="xvalue" placeholder="     x value  " style="margin-left: 41px; width: 20%;" class="values">
-                                <h5 style="margin-top: 0.4em; margin-left: 4px;">cm</h5>
-                            </div>
-                            <div style="display: flex; margin-top: 0.8em;">
-                                <h5 style="margin-top: 0.4em;margin-right: 1em;">No of divisions on vernier scale</h5>
-                                <input type="text" id="yvalue" placeholder="     y value  " style="margin-left: 10px; width: 20%;" class="values">
-                                <h5 style="margin-top: 0.4em; margin-left: 4px;">cm</h5>
-                            </div>
-                            <div style="display: flex; margin-top: 0.8em;">
-                                <h5 style="margin-top: 0.4em;margin-right: 1em;">Least Count (LC=x/y) </h5>
-                                <input type="button" id="btn1" value="Calculate LC" >
-                            </div>
-                            <div style="display: flex; margin: 10px 35%" >
-                                <h5 id="output1"></h5>
-                                <h5 id="output2"></h5>
-                            </div> -->
-
                             <div style="display: flex; margin: 10px 0px 20px 0px;"> 
                                 <h5 style="margin-right: 6.6em;">Microscope position</h5>
                                 <input type="range" min="0" max="100" step="1" value="50" id="myRange"/>
@@ -321,13 +208,6 @@
                                         <th>TR </th>
                                         <th>5β </th>
                                     </tr>
-                                    <!-- <tr>
-                                        <th ></th>
-                                        <th ></th>
-                                        <th ></th>
-                                        <th style="font-size: 10px; padding-bottom: 20px;">MSR+VSD*LC</th>
-                                        <th style="font-size: 10px;">TR(n+5)-TR(n)</th>
-                                    </tr> -->
                                </thead>
                                <tbody>
                                 <tr>
@@ -373,16 +253,6 @@
                                 <input type="button" id="btn2" value="Calculate β" >
                             </div>
 
-
-                            <!-- <div style="display: flex; margin-top: 0.5em;">
-                                <h5 style="margin-top: 0.4em;margin-right: 1em;">Length of glass plate (L)</h5>
-                                <input type="text" id="lvalue" placeholder="     L value  " style="margin-left: 70px; width: 20%;">
-                                <h5 style="margin-top: 0.4em; margin-left: 4px;">cm</h5>
-                            </div> -->
-
-
-
-
                             <div style="display: flex; margin-top: 0.8em;">
                                 <h5 style="margin-top: 0.4em;margin-right: 1.4em;">Thickness (t=λL/2β)</h5>
                                 <input type="button" id="btn3" value="Calculate t" >
@@ -391,74 +261,266 @@
                             <div style="display: flex; margin: 10px 35%; ">
                                 <h5 id="output7"></h5>
                                 <h5 id="output8"></h5>
-                                <!-- <h5 id="first"></h5>
-                                <h5><sup id="upper"></sup></h5> -->
-                                <h5 id="last"></h5>
-                                
+                                <h5 id="last"></h5>                 
                             </div>
-                            <!-- <center>
-                            <button onClick="history.go(0);" class="button button1 ">Reset</button>
-                            </center> -->
                         </div>
                     </div>   
                 </div>
             </div>
-            <div class="col-12 col-md-6 wrapper">
-                <!-- <div class="fixed-wrapper"> -->
+            <div class="d-none d-md-block col-md-6 wrapper">
                     <div class="fixed">
                         <img src="./physics_images/n50.png" alt="no light" id='img'>
                     </div>
-                <!-- </div> -->
             </div>
-            <!-- <div class="col-12 d-none d-md-block col-md-6">
-                <img src="./physics_images/n50.png" alt="no light" id='img'>
-            </div> -->
         </div>
         
-    </div>    
+    </div>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-12 d-block d-md-none offset-1">
+                <h4>Wedge Shaped Thin Film</h4>
+            </div>
+
+            <div class="col-12 d-block d-md-none col-md-6" id="imagecontainer">
+                <img src="./physics_images/n50.png" alt="no light" id='imag'>
+            </div>
+        </div>
+
+        <div class="row d-block d-md-none">
+            <div class="card" style="margin: 5px 14px">
+                <h5 class="card-header bg-primary text-white">Microscope Operations</h5>
+                <div class="card-body" style="padding: 15px 15px;">
+                    <div class="slidecontainer" >
+
+
+                        <div style="display: flex;">
+                            <!-- <button onClick="lightOn()" class="button button1" id="source">Light Off</button> -->
+                            <h6 style="margin-top: 0px; margin-right: 0px;">Wavelength of light (λ=5890 Å)</h6>
+                            <button onClick="lightOn()" class="button button0" id="source1" style="margin:0px 0px 10px 10px;padding: 0px 37px;font-size: 15px;">Light Off</button>
+                        </div>
+
+                        <div style="display: flex;">
+                            <h6 style="margin-top: 0.7em;">Select paper to measure thickness</h6>
+                            <button onclick="lightTwo(),currentButton1(0)" class="button2 Active1" id="two1" style="margin: 0.2em; width: 25%; ">A</button>
+                            <button onclick="lightFour(),currentButton1(1)" class="button2" id="four1" style="margin: 0.2em; width: 25%; margin-right: 0px;">B</button>
+                        </div>
+
+                        <div style="display: flex; margin: 10px 0px 9px 0px;"> 
+                            <h6 style="margin-right: 6em;">Microscope position</h6>
+                            <input type="range" min="0" max="100" step="1" value="50" id="myRange1"/>
+                        </div>
+
+
+                    </div>
+                </div>   
+            </div>
+
+        </div>
+
+        <div class="row d-block d-md-none">
+            <div class="card" style="margin: 6px 14px">
+                <h5 class="card-header bg-primary text-white">Least Count Of Microscope</h5>
+                <div class="card-body" style="padding: 15px 15px;">
+                    <div class="slidecontainer" >
+
+                        <div style="display: flex;">
+                            <h6 style="margin-top: 6px;">Least reading on main scale</h6>
+                            <input type="text" id="x1value" placeholder="x value" style="margin-left: 31px; width: 20%;" class="values">
+                            <h6 style="margin-top: 1.1em; margin-left: 4px;">cm</h6>
+                        </div>
+
+
+                        <div style="display: flex;margin-top: 0.4em;">
+                            <h6 style="margin-top: 0.4em;margin-bottom: 00.4em;">No of divisions on vernier scale</h6>
+                            <input type="text" id="y1value" placeholder="y value" style="margin-left: 40px; width: 23%;" class="values">
+                            <h6 style="margin-top: 1em; margin-left: 4px;">cm</h6>
+                        </div>
+
+
+                        <div style="display: flex; margin-top: 1.2em;">
+                            <h6 style="margin-top: 0.4em;margin-right: 0.8em;">Least Count (LC=x/y) </h6>
+                            <button onclick="fun1()" style=" font-size: 0.7em;
+                            font-weight: bold;
+                            margin: 2px 0px 0px 50px;
+                            padding: 5px;
+                            background-color: #EEE;
+                            color: #222;
+                            border: 4px solid orange;">Calculate LC</button>
+                        </div>
+                        <div style="display: flex; margin: 10px 31%" >
+                            <h6 id="output11"></h6>
+                            <h6 id="output21"></h6>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+        </div>
+
+        <div class="row d-block d-md-none">
+            <div class="card" style="margin: 6px 14px">
+                <h5 class="card-header bg-primary text-white">Observation</h5>
+                <div class="card-body" style="padding: 15px 15px;">
+                    <div class="slidecontainer" >
+
+                        <div style="display: flex;">
+                            <h6 style="margin-top: 10px;padding-right: 0px;">Length of the given  glass plate (L)</h6>
+                            <input type="text" id="l1value" placeholder="L value" style="margin-left: 20px; width: 23%;" class="values">
+                            <h6 style="margin-top: 1.1em; margin-left: 4px;">cm</h6>
+                        </div>
+
+                        <h6 style="margin: 10px 0px 15px 0px">Observation Table </h6>
+
+
+                        <table class="table table-striped">
+                            <thead class="thead-dark ">
+                                <tr>
+                                    <th>Fringe no </th>
+                                    <th>MSR  </th>
+                                    <th>VSD</th>
+                                    <th>TR </th>
+                                    <th>5β </th>
+                                </tr>
+                           </thead>
+                           <tbody>
+                            <tr>
+                                <th>n</th>
+                                <td style="width: 25%;padding-right: 0px;"><input type="text" id="msr11" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                <td style="width: 25%;padding-right: 0px;"><input type="text" id="vsd11" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                <td id="tr11"></td>
+                                <td id="beta11"></td>
+                            </tr>
+                            <tr>
+                                <th>n+5</th>
+                                <td style="width: 25%;padding-right: 0px;"><input type="text" id="msr21" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                <td style="width: 25%;padding-right: 0px;"><input type="text" id="vsd21" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                <td id="tr21">&nbsp;</td>
+                                <td id="beta21"></td>
+                            </tr>
+                            <tr>
+                                <th>n+10</th>
+                                <td style="width: 25%;padding-right: 0px;"><input type="text" id="msr31" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                <td style="width: 25%;padding-right: 0px;"><input type="text" id="vsd31" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                <td id="tr31">&nbsp;</td>
+                                <td id="beta31"></td>
+                            </tr>
+                            <tr>
+                                <th>n+15</th>
+                                <td style="width: 25%;padding-right: 0px;"><input type="text" id="msr41" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                <td style="width: 25%;padding-right: 0px;"><input type="text" id="vsd41" placeholder="value" style="box-sizing: border-box;margin: 0px;width: 50%;"></td>
+                                <td id="tr41">&nbsp;</td>
+                                <td id="beta41" ></td>
+                            </tr>
+                           </tbody>
+                        </table>
+
+
+                        <div style="display: flex; margin-top: 10px; ">
+                            <h6 id="output31"></h6>
+                            <h6 id="output41"></h6>
+                            <h6 id="output51" style="margin-left: 3px;"></h6>
+                            <h6 id="output61"></h6>
+                        </div>
+
+
+                        <div style="display: flex; margin-top: 0.8em; ">
+                            <button onclick="fun2()" style=" font-size: 0.7em;
+                            font-weight: bold;
+                            margin: 2px 0px 0px 105px;
+                            padding: 5px;
+                            background-color: #EEE;
+                            color: #222;
+                            border: 4px solid orange;">Calculate β</button>
+                            <!-- <input type="button" id="btn2" value="Calculate β" > -->
+                        </div>
+
+                        <div style="display: flex; margin-top: 0.8em;">
+                            <h6 style="margin-top: 0.4em;margin-right: 1.4em;">Thickness (t=λL/2β)</h6>
+                            <button onclick="fun7()" style=" font-size: 0.7em;
+                            font-weight: bold;
+                            margin: 2px 0px 0px 50px;
+                            padding: 5px;
+                            background-color: #EEE;
+                            color: #222;
+                            border: 4px solid orange;">Calculate t</button>
+                            <!-- <input type="button" id="btn3" value="Calculate t" > -->
+                        </div>
+
+                        <div style="display: flex; margin: 10px 33%; ">
+                            <h6 id="output71"></h6>
+                            <h6 id="output81"></h6>
+                            <h6 id="last1"></h6>                 
+                        </div>
+
+
+                        
+                    </div>
+                </div>   
+            </div>
+
+        </div>
+
+    </div>
+            
+           
         <script>
         var light = 0;
         var lighttwo = 1;
         var lightfour = 0;
         var slider = document.getElementById("myRange");
+        var slider1 = document.getElementById("myRange1");
         
         var swap = document.getElementById("source");
+        var swap1 = document.getElementById("source1");
         var two = document.getElementById("two");
         var four = document.getElementById("four");
+        var two1 = document.getElementById("two1");
+        var four1 = document.getElementById("four1");
         
     
         
 
         function lightOn(){
             var image = document.getElementById("img");
+            var image1 = document.getElementById("imag");
             if(light == 0) {
                 light = 1;
                 if(lighttwo == 1){
                     image.src = "./physics_images/l" +slider.value +".png";
-                    swap.innerHTML = "Light On"
+                    image1.src = "./physics_images/l" +slider1.value +".png";
+                    swap.innerHTML = "Light On";
+                    swap1.innerHTML = "Light On";
                 }
                 else if(lightfour == 1){
                     image.src = "./physics_images/a" +slider.value +".png";
-                    swap.innerHTML = "Light On"
+                    image1.src = "./physics_images/a" +slider1.value +".png";
+                    swap.innerHTML = "Light On";
+                    swap1.innerHTML = "Light On";
                 }
             }
             else{
                 light = 0;
                 image.src = "./physics_images/n" +slider.value +".png";
-                swap.innerHTML = "Light Off"
+                image1.src = "./physics_images/n" +slider1.value +".png";
+                swap.innerHTML = "Light Off";
+                swap1.innerHTML = "Light Off";
             }
         }
 
         function lightTwo(){
             var image = document.getElementById("img");
+            var image1 = document.getElementById("imag");
             if(lighttwo == 0) {
                 lighttwo = 1;
                 lightfour = 0;
                 if(light == 1){
                     image.src = "./physics_images/l" +slider.value +".png";
+                    image1.src = "./physics_images/l" +slider1.value +".png";
                 }
                 else{
                     image.src = "./physics_images/n" +slider.value +".png";
+                    image1.src = "./physics_images/n" +slider1.value +".png";
                 }
                 
             }
@@ -466,14 +528,17 @@
 
         function lightFour(){
             var image = document.getElementById("img");
+            var image1 = document.getElementById("imag");
             if(lightfour == 0) {
                 lightfour = 1;
                 lighttwo = 0;
                 if(light == 1){
                     image.src = "./physics_images/a" +slider.value +".png";
+                    image1.src = "./physics_images/a" +slider1.value +".png";
                 }
                 else{
                     image.src = "./physics_images/n" +slider.value +".png";
+                    image1.src = "./physics_images/n" +slider1.value +".png";
                 }
             }
         }
@@ -491,32 +556,58 @@
                 document.getElementById("img").src = "./physics_images/l" +this.value +".png";     
             }
         }
+
+        slider1.oninput = function () {
+            if(light == 0){
+                document.getElementById("imag").src = "./physics_images/n" +this.value +".png";
+            }
+            else if(light == 1 && lightfour == 1){
+                document.getElementById("imag").src = "./physics_images/a" +this.value +".png";         
+            }
+            else if(light == 1 && lighttwo == 1){
+                document.getElementById("imag").src = "./physics_images/l" +this.value +".png";     
+            }
+        }
         </script>
 
         <script>
             var x,x1,x2,x3,x4;
+            var a,a1,a2,a3,a4;
             var y,y1,y2,y3,y4;
+            var b,b1,b2,b3,b4;
             var z,z0,z1,z2,z3,z4,z5,z6,z7,z8,z9;
-            var cal;
-            var result;
-            var t;            
+            var c,c0,c1,c2,c3,c4,c5,c6,c7,c8,c9;
+            var cal,cal1;
+            var result,result1;
+            var t,t1;            
             var val1 = document.getElementById('xvalue');
             var val2 = document.getElementById('yvalue');
+            var val11 = document.getElementById('x1value');
+            var val21 = document.getElementById('y1value');
             var val3 = document.getElementById('lvalue');
+            var val31 = document.getElementById('l1value');
             var btn1 = document.getElementById('btn1');
             var btn2 = document.getElementById('btn2');
             var btn3 = document.getElementById('btn3');
             var out1 = document.getElementById('output1');
             var out2 = document.getElementById('output2');
+            var out11 = document.getElementById('output11');
+            var out21 = document.getElementById('output21');
             var out3 = document.getElementById('output3');
             var out4 = document.getElementById('output4');
             var out5 = document.getElementById('output5');
             var out6 = document.getElementById('output6');
             var out7 = document.getElementById('output7');
             var out8 = document.getElementById('output8');
-            // var upper = document.getElementById('upper');
-            // var first = document.getElementById('first');
+
+            var out31 = document.getElementById('output31');
+            var out41= document.getElementById('output41');
+            var out51 = document.getElementById('output51');
+            var out61 = document.getElementById('output61');
+            var out71 = document.getElementById('output71');
+            var out81 = document.getElementById('output81');
             var last = document.getElementById('last');
+            var last1 = document.getElementById('last1');
             var inputs = document.getElementsByClassName('values');
             var msr1 = document.getElementById('msr1');
             var msr2 = document.getElementById('msr2');
@@ -535,10 +626,29 @@
             var beta3 = document.getElementById('beta3');
             var beta4 = document.getElementById('beta4');
 
+            var msr11 = document.getElementById('msr11');
+            var msr21 = document.getElementById('msr21');
+            var msr31 = document.getElementById('msr31');
+            var msr41 = document.getElementById('msr41');
+            var vsd11 = document.getElementById('vsd11');
+            var vsd21 = document.getElementById('vsd21');
+            var vsd31 = document.getElementById('vsd31');
+            var vsd41 = document.getElementById('vsd41');
+            var tr11 = document.getElementById('tr11');
+            var tr21 = document.getElementById('tr21');
+            var tr31 = document.getElementById('tr31');
+            var tr41 = document.getElementById('tr41');
+            var beta11 = document.getElementById('beta11');
+            var beta21 = document.getElementById('beta21');
+            var beta31 = document.getElementById('beta31');
+            var beta41 = document.getElementById('beta41');
+
 
 
             var index = 0;
+            var index1 = 0;
             var item = document.getElementsByClassName('buttons');
+            var item1 = document.getElementsByClassName('button2');
 
             function currentButton(n){
                 showActive(index = n);
@@ -549,15 +659,31 @@
                     item[i].className = item[i].className.replace('Active','');
                 }
                 item[n].className += ' buttons Active';
+            }  
+
+            function currentButton1(n){
+                showActive1(index1 = n);
             }
 
+            function showActive1(n){
+                for(var i =0 ; i < item1.length ; i++){
+                    item1[i].className = item1[i].className.replace('Active1','');
+                }
+                item1[n].className += ' button2 Active1';
+            }  
             function fun1(){
                 x = val1.value;
+                a = val11.value;
                 y = val2.value;
+                b = val21.value;
                 cal = x/y;
+                cal1 = a/b;
                 result = cal.toFixed(3);
+                result1 = cal1.toFixed(3);
                 out1.innerHTML = " ∴ LC = ";
+                out11.innerHTML = " ∴ LC = ";
                 out2.innerHTML = cal.toFixed(3) + " cm";
+                out21.innerHTML = cal1.toFixed(3) + " cm";
                 for(var i = 0 ; i < 2 ; i++){
                     inputs[i].value = '';
                 }
@@ -565,50 +691,84 @@
             function fun2(){
                 x1 = msr1.value;
                 y1 = vsd1.value;
+                a1 = msr11.value;
+                b1 = vsd11.value;
                 z1 = result;
+                c1 = result1;
                 z1=y1*z1;
+                c1=b1*c1;
                 z1 = parseFloat(x1) + z1;
+                c1 = parseFloat(a1) + c1;
                 tr1.innerHTML = z1.toFixed(3);
+                tr11.innerHTML = c1.toFixed(3);
                 fun3();
             }
 
             function fun3(){
                 x2 = msr2.value;
                 y2 = vsd2.value;
+                a2 = msr21.value;
+                b2 = vsd21.value;
                 z2 = result;
+                c2 = result1;
                 z2=y2*z2;
+                c2=b2*c2;
                 z2 = parseFloat(x2) + z2;
+                c2 = parseFloat(a2) + c2;
                 tr2.innerHTML = z2.toFixed(3);
+                tr21.innerHTML = c2.toFixed(3);
                 z5=Math.abs(z2-z1);
                 z5=z5*5;
+                c5=Math.abs(c2-c1);
+                c5=c5*5;
                 beta1.innerHTML = z5.toFixed(3);
+                beta11.innerHTML = c5.toFixed(3);
                 fun4();
             }
 
             function fun4(){
                 x3 = msr3.value;
                 y3 = vsd3.value;
+                a3 = msr31.value;
+                b3 = vsd31.value;
                 z3 = result;
                 z3=y3*z3;
+                c3 = result1;
+                c3=b3*c3;
                 z3 = parseFloat(x3) + z3;
+                c3 = parseFloat(a3) + c3;
                 tr3.innerHTML = z3.toFixed(3);
+                tr31.innerHTML = c3.toFixed(3);
                 z6=Math.abs(z3-z2);
                 z6=z6*5;
+                c6=Math.abs(c3-c2);
+                c6=c6*5;
                 beta2.innerHTML = z6.toFixed(3);
+                beta21.innerHTML = c6.toFixed(3);
                 fun5();
             }
 
             function fun5(){
                 x4 = msr4.value;
                 y4 = vsd4.value;
+                a4 = msr41.value;
+                b4 = vsd41.value;
                 z4 = result;
                 z4=y4*z4;
+                c4 = result1;
+                c4=b4*c4;
                 z4 = parseFloat(x4) + z4;
                 tr4.innerHTML = z4.toFixed(3);
+                c4 = parseFloat(a4) + c4;
+                tr41.innerHTML = c4.toFixed(3);
                 z7=Math.abs(z4-z3);
                 z7=z7*5;
+                c7=Math.abs(c4-c3);
+                c7=c7*5;
                 beta3.innerHTML = z7.toFixed(3);
                 beta4.innerHTML = '-';
+                beta31.innerHTML = c7.toFixed(3);
+                beta41.innerHTML = '-';
                 fun6();
             }
 
@@ -616,24 +776,39 @@
                 z8=z5+z6+z7;
                 z8=z8/3;
                 z9=z8/5;
+                c8=c5+c6+c7;
+                c8=c8/3;
+                c9=c8/5;
                 out3.innerHTML = " ∴ MEAN 5β = ";
                 out4.innerHTML = z8.toFixed(3) + " cm";
                 out5.innerHTML = " ∴ MEAN β = ";
                 out6.innerHTML = z9.toFixed(3) + " cm";
+                out31.innerHTML = " ∴MEAN 5β=";
+                out41.innerHTML = c8.toFixed(3) + "cm";
+                out51.innerHTML = " ∴MEAN β=";
+                out61.innerHTML = c9.toFixed(3) + "cm";
             }
 
             function fun7(){
                 var lamda = 5890;
                 z=val3.value;
                 z0=2*z9;
+                c=val31.value;
+                c0=2*c9;
                 t = lamda*z;
                 t = t/z0;
                 t=t/100000000
+                t1 = lamda*c;
+                t1 = t1/c0;
+                t1=t1/100000000
                 out7.innerHTML = 't = ';
                 out8.innerHTML = t.toFixed(4);
+                out71.innerHTML = 't = ';
+                out81.innerHTML = t1.toFixed(4);
                 // first.innerHTML = '*10';
                 // upper.innerHTML = '-8';
                 last.innerHTML = ' cm';
+                last1.innerHTML = ' cm';
             }
 
             btn1.addEventListener('click',fun1);
